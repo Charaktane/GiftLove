@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tartaruga.css">
+    <title>Presente de Aniversário</title>
+</head>
+
+<body>
+    <div class="mobile-header">
+        <h1>🎉 2 anos de namoro🎉</h1>
+        <p>Toque no presente!</p>
+    </div>
+
+    <div class="content">
+        <!-- Lado esquerdo: Presente -->
+        <div class="presente-area">
+            <div class="presente">
+                <div class="caixa">
+                    <div class="fita"></div>
+                </div>
+                <div class="container">
+                    <div class="laco">
+                        <div class="volta esq"></div>
+                        <div class="volta"></div>
+                    </div>
+                    <div class="topo">
+                        <div class="fita"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cartas que aparecem embaixo do presente em grid 3x2 -->
+            <div class="cartas-container">
+                <div class="paper" data-letter="1">📝</div>
+                <div class="paper" data-letter="2">📝</div>
+                <div class="paper" data-letter="3">📝</div>
+                <div class="paper" data-letter="4">📝</div>
+                <div class="paper" data-letter="5">📝</div>
+                <div class="paper" data-letter="6">📝</div>
+            </div>
+        </div>
+
+        <!-- Lado direito: Tartaruga -->
+        <div class="tartaruga-area">
+            <div class="grass"></div>
+            <div class="turtle">
+                <div class="head"></div>
+                <div class="leg Left"></div>
+                <div class="leg Right"></div>
+                <div class="tail"></div>
+                <div class="hull">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cartas que aparecem -->
+    <div class="letter" id="letter1">
+        <button class="close" onclick="closeLetter()">×</button>
+        <div class="content">
+            <h2>📜 Carta 1</h2>
+            <p>a</p>
+            <div class="decoration">🎂</div>
+        </div>
+    </div>
+    <div class="letter" id="letter2">
+        <button class="close" onclick="closeLetter()">×</button>
+        <div class="content">
+            <h2>📜 Carta 2</h2>
+            <p>Hoje é o seu dia! Celebre com quem você ama e faça memórias inesquecíveis. Felicidades!</p>
+            <div class="decoration">🎈</div>
+        </div>
+    </div>
+    <div class="letter" id="letter3">
+        <button class="close" onclick="closeLetter()">×</button>
+        <div class="content">
+            <h2>📜 Carta 3</h2>
+            <p>Que este ano traga realizações, saúde e muito amor. Você é especial e faz a diferença!</p>
+            <div class="decoration">🎁</div>
+        </div>
+    </div>
+    <div class="letter" id="letter4">
+        <button class="close" onclick="closeLetter()">×</button>
+        <div class="content">
+            <h2>📜 Carta 4</h2>
+            <p>Desejo que seus sonhos se tornem realidade. Continue brilhando e inspirando todos ao seu redor!</p>
+            <div class="decoration">⭐</div>
+        </div>
+    </div>
+    <div class="letter" id="letter5">
+        <button class="close" onclick="closeLetter()">×</button>
+        <div class="content">
+            <h2>📜 Carta 5</h2>
+            <p>Que a vida te presenteie com momentos de paz e felicidade. Você merece o melhor sempre!</p>
+            <div class="decoration">🌸</div>
+        </div>
+    </div>
+    <div class="letter" id="letter6">
+        <button class="close" onclick="closeLetter()">×</button>
+        <div class="content">
+            <h2>📜 Carta 6</h2>
+            <p>Mais um ano de conquistas! Que venham muitas aventuras e sorrisos. Parabéns pela sua jornada!</p>
+            <div class="decoration">🎯</div>
+        </div>
+    </div>
+
+        <div class="tartaruga-message" id="tartarugaMessage">
+            <button class="close" onclick="closeTartarugaMessage()">×</button>
+            <div class="content">
+                <div class="turtle-icon">🐢</div>
+                <h2>Olá! Eu sou a</h2>
+                <p>DOROTH!</p>
+            </div>
+        </div>
+
+    <!-- Controles de áudio -->
+    <div class="audio-controls">
+        <button id="musicToggle" class="audio-btn">🎵</button>
+        <button id="soundToggle" class="audio-btn">🔊</button>
+    </div>
+
+    <!-- Áudios -->
+    <audio id="openSound" src="https://assets.mixkit.co/active_storage/sfx/256/256-preview.mp3" preload="auto"></audio>
+    <audio id="paperSound" src="https://assets.mixkit.co/active_storage/sfx/269/269-preview.mp3" preload="auto"></audio>
+    <audio id="backgroundMusic" src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-443.mp3"
+        preload="auto" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
