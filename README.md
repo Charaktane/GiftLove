@@ -19,7 +19,7 @@ Este projeto é uma página web que combina:
 
 ## 🎵 Músicas das cartas
 
-Cada carta tem sua própria música para reforçar a emoção:  
+> **Nota legal:** As músicas originais listadas abaixo são protegidas por copyright e **não estão incluídas no projeto**. Para uso legal, substitua por músicas royalty-free em `audio/`.   
 
 | Carta | Título | Música | Link |
 |-------|--------|--------|------|
@@ -51,12 +51,6 @@ gift-of-love/
 │ └─ tartaruga.css # Estilo da tartaruga
 ├─ script.js # Lógica de interatividade e músicas
 ├─ audio/ # Áudios das cartas
-│ ├─ my-love-mine-all-mine.mp3
-│ ├─ cant-help-falling.mp3
-│ ├─ just-the-two.mp3
-│ ├─ outro-lugar.mp3
-│ ├─ velha-infancia.mp3
-│ └─ assim-como-um-menino.mp3
 └─ gifs/ # Imagens animadas das cartas
 
 ---
@@ -75,16 +69,18 @@ gift-of-love/
 
 Você pode facilmente:  
 
-- Trocar as músicas por outras de sua preferência (atualizando o array `musics` em `script.js`).  
+- Trocar as músicas por outras de sua preferência, indo em audios, ou a ordem(atualizando o array `musics` em `script.js`).  
 - Alterar os textos das cartas.  
 - Substituir gifs ou imagens das cartas e tartaruga.  
 
 ---
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## ✨ Créditos
 
 - Projeto criado para **celebração de namoro**.  
-- Músicas de: Mitski, Elvis Presley, Bill Withers, Detonautas, Tribalistas, LS Jack.  
 - Presente animado: [YouTube](https://youtu.be/IPr_4oBfmPA?si=EMouF3-78muBDhpS)  
 - Tartaruga interativa: [YouTube](https://youtu.be/njLwKz-4j-4?si=2IYTJ8TOZKvLHcM5)  
 
