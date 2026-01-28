@@ -15,21 +15,22 @@ document.body.appendChild(overlay);
 
 // Música de fundo
 const bgMusic = document.getElementById('backgroundMusic');
-bgMusic.volume = 0.6;
+const BG_VOLUME = 0.2; // volume base do bgMusic
+bgMusic.volume = BG_VOLUME;
 
 // Lista de músicas das cartas
 const musics = [
-    "audio/my-love-mine-all-mine.mp3",  // Carta 1
-    "audio/cant-help-falling.mp3",      // Carta 2
-    "audio/just-the-two.mp3",           // Carta 3
-    "audio/outro-lugar.mp3",            // Carta 4
-    "audio/velha-infancia.mp3",         // Carta 5
-    "audio/assim-como-um-menino.mp3"    // Carta 6
+    "audio/my-love-mine-all-mine.mp3",
+    "audio/cant-help-falling.mp3",
+    "audio/just-the-two.mp3",
+    "audio/outro-lugar.mp3",
+    "audio/velha-infancia.mp3",
+    "audio/como-um-menino.mp3"
 ];
 
 let currentAudio = null;
 
-// Função para tocar sons de efeitos
+// =================== Funções de Áudio =================== //
 function playSound(soundId) {
     if (!soundEnabled) return;
     const sound = document.getElementById(soundId);
@@ -39,60 +40,56 @@ function playSound(soundId) {
     }
 }
 
-// Função para tocar música das cartas
 function playMusic(index) {
     // Para música anterior da carta
-    if (currentAudio) {
-        fadeOutAudio(currentAudio, 500);
-        currentAudio = null;
-    }
+    if (currentAudio) fadeOutAudio(currentAudio, 500);
 
-    // Silencia música de fundo suavemente
-    fadeVolume(bgMusic, 0, 500);
+    // Abaixa bgMusic para volume baixo (não zero)
+    fadeVolume(bgMusic, 0.05, 500);
 
-    const musicFile = musics[index];
-    const audio = new Audio(musicFile);
+    // Toca música da carta
+    const audio = new Audio(musics[index]);
     audio.volume = musicEnabled ? 0.6 : 0;
-    audio.play().catch(() => console.log('Autoplay bloqueado. Clique em algo primeiro.'));
+    audio.loop = true; // para tocar até fechar
+    audio.play().catch(() => console.log('Autoplay bloqueado.'));
     currentAudio = audio;
 }
 
-// Função de fade para áudio (subir ou descer volume)
 function fadeVolume(audio, targetVolume, duration = 500) {
     if (!audio) return;
-
     const step = 50;
-    const difference = targetVolume - audio.volume;
-    const increment = difference / (duration / step);
+    const diff = targetVolume - audio.volume;
+    const increment = diff / (duration / step);
 
-    const fadeInterval = setInterval(() => {
-        if ((increment > 0 && audio.volume < targetVolume) || (increment < 0 && audio.volume > targetVolume)) {
+    const interval = setInterval(() => {
+        if ((increment > 0 && audio.volume < targetVolume) ||
+            (increment < 0 && audio.volume > targetVolume)) {
             audio.volume += increment;
         } else {
             audio.volume = targetVolume;
-            clearInterval(fadeInterval);
+            clearInterval(interval);
         }
     }, step);
 }
 
-// Fade out suave de uma música (para carta)
 function fadeOutAudio(audio, duration = 500) {
     if (!audio) return;
-
     const step = 50;
     const decrement = audio.volume / (duration / step);
 
-    const fadeInterval = setInterval(() => {
+    const interval = setInterval(() => {
         if (audio.volume - decrement > 0) {
             audio.volume -= decrement;
         } else {
             audio.volume = 0;
             audio.pause();
             audio.currentTime = 0;
-            clearInterval(fadeInterval);
+            clearInterval(interval);
         }
     }, step);
 }
+
+// =================== Eventos =================== //
 
 // Abrir presente
 caixa.addEventListener('click', () => {
@@ -115,7 +112,8 @@ caixa.addEventListener('click', () => {
 papers.forEach(paper => {
     paper.addEventListener('click', function() {
         if (!presentOpened) return;
-        const letterNum = this.dataset.letter;
+
+        const letterNum = parseInt(this.dataset.letter, 10);
         const letter = document.getElementById(`letter${letterNum}`);
         if (!letter) return;
 
@@ -127,7 +125,6 @@ papers.forEach(paper => {
         this.classList.add('clicked');
         setTimeout(() => this.classList.remove('clicked'), 500);
 
-        // Tocar música da carta
         playMusic(letterNum - 1);
     });
 });
@@ -142,8 +139,8 @@ function closeLetter() {
         currentAudio = null;
     }
 
-    // Restaura música de fundo com fade
-    fadeVolume(bgMusic, musicEnabled ? 0.6 : 0, 500);
+    // Restaura bgMusic ao volume normal
+    fadeVolume(bgMusic, musicEnabled ? BG_VOLUME : 0, 500);
 }
 
 // Controles de áudio
@@ -167,23 +164,22 @@ overlay.addEventListener('click', () => {
     closeTartarugaMessage();
 });
 
-// Confetes simples
+// =================== Confetes =================== //
 function createConfetti() {
     const colors = ['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff'];
     for (let i = 0; i < 20; i++) {
-        const confetti = document.createElement('div');
-        confetti.style.cssText = `
+        const c = document.createElement('div');
+        c.style.cssText = `
             position: fixed;
             width: 10px; height: 10px;
             background: ${colors[Math.floor(Math.random()*colors.length)]};
-            top: 0;
-            left: ${Math.random()*100}vw;
+            top: 0; left: ${Math.random()*100}vw;
             border-radius: 50%;
             animation: confettiFall 1s linear forwards;
             z-index: 9999;
         `;
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 1000);
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 1000);
     }
 }
 
@@ -196,16 +192,13 @@ style.textContent = `
 }`;
 document.head.appendChild(style);
 
-// Mensagem da tartaruga
+// =================== Tartaruga =================== //
 function showTartarugaMessage() {
     playSound('paperSound');
     overlay.classList.add('active');
     tartarugaMessage.classList.add('show');
 
-    // Silencia bgMusic e toca se necessário
-    if (musicEnabled) {
-        fadeVolume(bgMusic, 0, 500);
-    }
+    if (musicEnabled) fadeVolume(bgMusic, 0.05, 500);
 
     createTartarugaConfetti();
 }
@@ -213,32 +206,28 @@ function showTartarugaMessage() {
 function closeTartarugaMessage() {
     tartarugaMessage.classList.remove('show');
     overlay.classList.remove('active');
-
-    fadeVolume(bgMusic, musicEnabled ? 0.6 : 0, 500);
+    fadeVolume(bgMusic, musicEnabled ? BG_VOLUME : 0, 500);
 }
 
-// Confetes especiais para tartaruga
 function createTartarugaConfetti() {
     const colors = ['#99CD85','#CFE0BC','#7FA653','#63783D','#2E7D32'];
     for (let i = 0; i < 30; i++) {
-        const confetti = document.createElement('div');
-        confetti.style.cssText = `
+        const c = document.createElement('div');
+        c.style.cssText = `
             position: fixed;
             width: ${Math.random()*15+5}px;
             height: ${Math.random()*15+5}px;
             background: ${colors[Math.floor(Math.random()*colors.length)]};
-            top: 0;
-            left: ${Math.random()*100}vw;
+            top: 0; left: ${Math.random()*100}vw;
             border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
             animation: confettiFall ${Math.random()*1+0.5}s linear forwards;
             z-index: 9999;
         `;
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 1500);
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 1500);
     }
 }
 
-// Clique na tartaruga
 turtle?.addEventListener('click', showTartarugaMessage);
 
 // Inicialização
