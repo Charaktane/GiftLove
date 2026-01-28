@@ -42,19 +42,6 @@ Este projeto é uma página web que combina:
 
 ---
 
-## 📂 Estrutura do Projeto
-
-gift-of-love/
-├─ index.html # Página principal
-├─ css/ # Estilos
-│ ├─ style.css # Estilo do presente
-│ └─ tartaruga.css # Estilo da tartaruga
-├─ script.js # Lógica de interatividade e músicas
-├─ audio/ # Áudios das cartas
-└─ gifs/ # Imagens animadas das cartas
-
----
-
 ## 🚀 Como usar
 
 1. Abra o `index.html` no navegador.  
