@@ -1,10 +1,11 @@
-/* RESET COMPLETO - VAMOS REESCREVER TUDO */
 
 /* ÁREA DA TARTARUGA */
+
 .tartaruga-area {
     flex: 1;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: flex-end;
     height: 100%;
     position: relative;
@@ -14,14 +15,15 @@
 
 /* GRAMA - ATRÁS DE TUDO */
 .grass {
-    position: absolute !important;
-    bottom: 0 !important;
-    right: 0 !important;
+    position: absolute ;
+    bottom: 0 ;
+    left: 50% ;
+    transform: translateX(-50%);
     width: 800px;
     height: 400px;
     /* Menor altura */
     background: linear-gradient(to top, #2E7D32, #4CAF50, #81C784);
-    z-index: 1 !important;
+    z-index: 1 ;
     border-radius: 50% 50% 0 0;
     box-shadow: 0 -5px 15px rgba(0, 100, 0, 0.3);
 }
@@ -30,12 +32,11 @@
 .turtle {
     width: 400px;
     height: 400px;
-    position: relative !important;
+    position: relative ;
     transform: rotate(-15deg);
     z-index: 100 !important;
     /* Z-INDEX MUITO ALTO */
-    margin-right: 50px;
-    margin-bottom: 50px;
+    margin: 0 auto;
     pointer-events: none;
     /* Não interfere com cliques */
 }
@@ -570,5 +571,61 @@
 
     .tartaruga-message .turtle-icon {
         font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .tartaruga-area {
+        width: 100%;
+        height: auto;
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        position: center;
+        overflow: visible;
+    }
+
+    .grass {
+        width: 140%;
+        height: 220px;
+        position: absolute;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .turtle {
+        position: relative !important;
+        margin: 0 auto !important;
+        transform: rotate(-15deg) scale(0.6) !important;
+        z-index: 10;
+    }
+}
+
+@media (max-width: 900px) {
+    .tartaruga-area {
+        min-height: 220px;
+    }
+
+    .grass {
+        width: 140%;
+        height: 220px;
+        bottom: -60px;
+    }
+
+    .turtle {
+        transform: rotate(-15deg) scale(0.6);
+    }
+}
+
+@media (max-width: 360px) {
+    .grass {
+        height: 180px;
+        bottom: -40px;
+    }
+
+    .turtle {
+        transform: rotate(-15deg) scale(0.5);
     }
 }
