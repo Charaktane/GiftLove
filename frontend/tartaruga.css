@@ -443,8 +443,6 @@
     transition: transform 0.3s ease !important;
 }
 
-/* Adicione no final do arquivo style.css, após todas as media queries */
-
 /* MENSAGEM DA TARTARUGA */
 .tartaruga-message {
     position: fixed;
@@ -575,16 +573,7 @@
 }
 
 @media (max-width: 900px) {
-    .tartaruga-area {
-        width: 100%;
-        height: auto;
-        min-height: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        position: center;
-        overflow: visible;
-    }
+
 
     .grass {
         width: 140%;
@@ -595,18 +584,10 @@
         transform: translateX(-50%);
     }
 
-    .turtle {
-        position: relative !important;
-        margin: 0 auto !important;
-        transform: rotate(-15deg) scale(0.6) !important;
-        z-index: 10;
-    }
 }
 
 @media (max-width: 900px) {
-    .tartaruga-area {
-        min-height: 220px;
-    }
+
 
     .grass {
         width: 140%;
@@ -614,9 +595,7 @@
         bottom: -60px;
     }
 
-    .turtle {
-        transform: rotate(-15deg) scale(0.6);
-    }
+  
 }
 
 @media (max-width: 360px) {
@@ -625,7 +604,32 @@
         bottom: -40px;
     }
 
-    .turtle {
-        transform: rotate(-15deg) scale(0.5);
+
+}
+
+@media (max-width: 768px) {
+
+
+    .grass {
+        width: 140%;
+        height: 240px;
+        bottom: -70px;
+    }
+
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+
+    .grass {
+        height: 200px;
+        bottom: -50px;
     }
 }
+
+/* Mobile muito pequeno */
+@media (max-width: 360px) {
+    .grass {
+        height: 180px;
+        bottom: -40px;
+    }}
