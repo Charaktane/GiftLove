@@ -239,6 +239,23 @@ style.textContent = `
 document.head.appendChild(style);
 
 // =================== Tartaruga =================== //
+
+const gifs = [
+    "gifs/turtles/t1.gif",
+    "gifs/turtles/t2.gif",
+    "gifs/turtles/t3.gif",
+    "gifs/turtles/t4.gif",
+    "gifs/turtles/t5.gif",
+    "gifs/turtles/t6.gif",
+    "gifs/turtles/t7.gif",
+    "gifs/turtles/t8.gif",
+    "gifs/turtles/t9.gif",
+    "gifs/turtles/t10.gif"
+];
+let currentGif = 0;
+
+const turtleIcon = document.getElementById('turtle-icon');
+
 function showTartarugaMessage() {
     playSound('paperSound');
     overlay.classList.add('active');
@@ -247,6 +264,12 @@ function showTartarugaMessage() {
     if (musicEnabled) fadeVolume(bgMusic, 0.05, 500);
 
     createTartarugaConfetti();
+  // troca o emoji pelo GIF
+    turtleIcon.innerHTML = `<img src="${gifs[currentGif]}" style="max-width:100px;">`;
+
+    currentGif++;
+    if (currentGif >= gifs.length) currentGif = 0;
+
 }
 
 function closeTartarugaMessage() {
@@ -278,12 +301,10 @@ turtle?.addEventListener('click', showTartarugaMessage);
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-    // Adicionar eventos aos botões de fechar nas cartas
     document.querySelectorAll('.letter .close').forEach(closeBtn => {
         closeBtn.addEventListener('click', closeLetter);
     });
-    
-    // Precarregar áudios
+
     document.querySelectorAll('audio').forEach(audio => audio.load());
     console.log('Presente carregado!');
 });
